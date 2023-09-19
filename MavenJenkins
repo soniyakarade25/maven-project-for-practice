@@ -12,9 +12,8 @@ pipeline
         {
             steps{ withMaven(globalMavenSettingsConfig: '', jdk: 'LocalJDK', maven: 'locaMVN', mavenSettingsConfig: '', traceability: true)
                     {
-                        'sh mvn compile'
-                    }
-                 }
+                        sh 'mvn compile'
+                    }}
         }
 
     }
