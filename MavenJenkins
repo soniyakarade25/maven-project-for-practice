@@ -8,5 +8,14 @@ pipeline
             steps{git 'https://github.com/soniyakarade25/maven-project-for-practice.git'}
         }
 
+        stage ('code compile')
+        {
+            steps{ withMaven(globalMavenSettingsConfig: '', jdk: 'LocalJDK', maven: 'locaMVN', mavenSettingsConfig: '', traceability: true)
+                    {
+                        'sh mvn compile'
+                    }
+                 }
+        }
+
     }
 }
