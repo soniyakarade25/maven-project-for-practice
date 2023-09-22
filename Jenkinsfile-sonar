@@ -3,8 +3,10 @@ pipeline
     agent any
     stages{
             stage('scm checkout'){
-                git branch: 'master', url: 'https://github.com/soniyakarade25/maven-project-for-practice.git'
-            }
+                steps{
+                        git branch: 'master', url: 'https://github.com/soniyakarade25/maven-project-for-practice.git'
+                     }
+                    }
 
             stage('execute unit test'){
                 steps{
