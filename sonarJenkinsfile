@@ -18,12 +18,6 @@ stage ('run sonar and build the code')
  {  sh 'mvn package' } 
 } } 
 
-stage('Scp to deploy'){ 
-      steps{ sshagent (credentials: ['deploy-dev']) 
-          {sh 'scp -o StrictHostKeyChecking=no **/webapp.war ec2-user@172.31.5.209:/usr/share/tomcat/webapps/'
-      }
-    }
-   }
 
 }
 }
