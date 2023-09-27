@@ -15,11 +15,17 @@ pipeline
              }
             }
             stage('sonar analysis and build'){
-                steps{withSonarQubeEnv(credentialsId: 'sonar', installationName: 'sonarqube'){
-                    withMaven(globalMavenSettingsConfig: '67372080-f806-4b32-b3c7-cce0d0616193', jdk: 'LocalJDK', maven: 'locaMVN', mavenSettingsConfig: '7e412372-de88-4d15-9509-88104a0b1c21', traceability: true) {
-                     sh 'mvn package'}}
+                steps{
+                    withMaven(globalMavenSettingsConfig: '67372080-f806-4b32-b3c7-cce0d0616193', jdk: 'LocalJDK', maven: 'locaMVN', mavenSettingsConfig: '7e412372-de88-4d15-9509-88104a0b1c21', traceability: true) 
+                    { sh 'mvn package'}}
              }
-            }
+            stage('Scp to deploy'){ 
+              steps{ sshagent (credentials: ['deploy-dev']) 
+                  {sh 'scp -o StrictHostKeyChecking=no **/webapp.war ec2-user@172.31.5.209:/usr/share/tomcat/webapps/'
+          }
+        }
+       }
+
 
     }
 }
