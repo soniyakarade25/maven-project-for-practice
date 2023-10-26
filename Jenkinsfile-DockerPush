@@ -18,6 +18,9 @@ pipeline{
                 {sh 'mvn package'}
             }
         }
-        
+
+        stage('create docker image'){
+            steps{sh 'docker build -t soniyakaradesk/devops-oct23:latest .'}
+          }      
     }
 }
