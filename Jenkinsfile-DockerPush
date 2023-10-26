@@ -3,7 +3,21 @@ pipeline{
     stages{
         stage ('scm checkout'){
             steps { git ' https://github.com/soniyakarade25/maven-project-for-practice.git'
-        }}
+            }
+        }
+        stage('execut unit test'){
+            steps{
+                withMaven(globalMavenSettingsConfig: '', jdk: 'LocalJDK', maven: 'locaMVN', mavenSettingsConfig: '', traceability: true) 
+                {sh 'mvn test'}
+            }
+        }
+
+        stage('code build'){
+            steps{
+                withMaven(globalMavenSettingsConfig: '', jdk: 'LocalJDK', maven: 'locaMVN', mavenSettingsConfig: '', traceability: true) 
+                {sh 'mvn package'}
+            }
+        }
         
     }
 }
